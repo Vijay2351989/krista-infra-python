@@ -9,9 +9,15 @@ description = "Cache operations package with Infinispan integration"
 readme = "README.md"
 requires-python = ">=3.8"
 dependencies = [
+    "coverage>=7.0.0",
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.21.0",
+    "pytest-cov>=4.0.0",
+    "pytest-mock>=3.10.0",
+    "pytest-xdist>=3.0.0",
     "requests>=2.25.0",
 ]
 
 [project.urls]
-Homepage = "https://github.com/yourusername/knowledge-agent-cache"
-Repository = "https://github.com/yourusername/knowledge-agent-cache"
+Homepage = "https://github.com/Vijay2351989/krista-infra-python/krista-infinispan"
+Repository = "https://github.com/Vijay2351989/krista-infra-python/krista-infinispan"
