@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "krista-infinispan"
+version = "1.0.0"
+description = "Cache operations package with Infinispan integration"
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = [
+    "requests>=2.25.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/yourusername/knowledge-agent-cache"
+Repository = "https://github.com/yourusername/knowledge-agent-cache"
