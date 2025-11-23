@@ -5,7 +5,7 @@ import pytest
 import json
 import base64
 from unittest.mock import Mock, patch, MagicMock
-from krista_infinispan.cache_operations import CacheOperations
+from krista_infinispan.package.cache_operations import CacheOperations
 
 
 class TestCacheOperations:

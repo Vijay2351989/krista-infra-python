@@ -6,7 +6,7 @@ import os
 import tempfile
 import json
 from unittest.mock import patch
-from krista_infinispan.cache_config import CacheConfig
+from krista_infinispan.package.cache_config import CacheConfig
 
 
 class TestCacheConfig:

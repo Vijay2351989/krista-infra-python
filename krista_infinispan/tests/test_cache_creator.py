@@ -4,7 +4,7 @@ Tests for CacheCreator class
 import pytest
 import requests
 from unittest.mock import Mock, patch
-from krista_infinispan.cache_creator import CacheCreator
+from krista_infinispan.package.cache_creator import CacheCreator
 
 
 class TestCacheCreator:
