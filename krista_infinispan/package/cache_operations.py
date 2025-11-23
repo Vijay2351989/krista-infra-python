@@ -14,8 +14,8 @@ import base64
 import time
 from typing import Any, Optional
 from requests.auth import HTTPDigestAuth
-from krista_infinispan.cache_config import CacheConfig
-from krista_infinispan.cache_creator import CacheCreator
+from package.cache_config import CacheConfig
+from package.cache_creator import CacheCreator
 
 logger = logging.getLogger(__name__)
 
