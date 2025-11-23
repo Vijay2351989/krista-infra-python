@@ -1,0 +1,60 @@
+image: python:3.9
+
+pipelines:
+  pull-requests:
+    '**':
+      - step:
+          name: Run Tests
+          caches:
+            - pip
+          script:
+            - cd krista_infinispan
+            - pip install uv
+            - uv sync --dev
+            - uv pip install -e .
+            - python -c "import krista_infinispan; print('✅ krista_infinispan imported')"
+            - python -c "from krista_infinispan.package.cache_config import CacheConfig; print('✅ CacheConfig imported')"
+            - uv run pytest --cov=krista_infinispan --cov-report=term-missing --cov-report=xml --junit-xml=test-results.xml --cov-fail-under=50 -v
+            - |
+              COVERAGE=$(python -c "import xml.etree.ElementTree as ET; tree = ET.parse('coverage.xml'); root = tree.getroot(); print(float(root.attrib['line-rate']) * 100)")
+              echo "Coverage: ${COVERAGE}%"
+              if (( $(echo "$COVERAGE < 50" | bc -l) )); then
+                echo "❌ Coverage ${COVERAGE}% is below required 50%"
+                exit 1
+              fi
+          artifacts:
+            - krista_infinispan/test-results.xml
+            - krista_infinispan/coverage.xml
+
+  tags:
+    'v-infinispan-*':
+      - step:
+          name: Publish to PyPI
+          script:
+            - VERSION=${BITBUCKET_TAG#v-infinispan-}
+            - echo "Publishing krista-infinispan version $VERSION"
+            - cd krista_infinispan
+            - sed -i "s/^version = .*/version = \"$VERSION\"/" pyproject.toml
+            - pip install uv build twine
+            - uv sync --dev
+            - python -m build
+            - echo "Built packages:"
+            - ls -la dist/
+            - python -m twine check dist/*
+            - python -m twine upload dist/* --username __token__ --password $PYPI_TOKEN
+            - echo "✅ Successfully published krista-infinispan $VERSION to PyPI"
+          artifacts:
+            - krista_infinispan/dist/*
+
+  branches:
+    main:
+      - step:
+          name: Run Tests on Main
+          caches:
+            - pip
+          script:
+            - cd krista_infinispan
+            - pip install uv
+            - uv sync --dev
+            - uv pip install -e .
+            - uv run pytest --cov=krista_infinispan --cov-report=term-missing --cov-report=xml --junit-xml=test-results.xml -v
