@@ -11,7 +11,7 @@ setup(
     description="Python package with Infinispan integration",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/Vijay2351989/krista-infra-python/krista-infinispan",
+    url="https://github.com/Vijay2351989/krista-infra-python/krista_infinispan",
     packages=find_packages('package'),
     classifiers=[
         "Development Status :: 3 - Alpha",

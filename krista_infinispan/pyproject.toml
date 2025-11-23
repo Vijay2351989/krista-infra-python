@@ -18,6 +18,11 @@ dependencies = [
     "requests>=2.25.0",
 ]
 
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["krista_infinispan*"]
+exclude = ["tests*"]
+
 [project.urls]
 Homepage = "https://github.com/Vijay2351989/krista-infra-python/krista-infinispan"
 Repository = "https://github.com/Vijay2351989/krista-infra-python/krista-infinispan"
