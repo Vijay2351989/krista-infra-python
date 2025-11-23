@@ -4,8 +4,8 @@ Tests for CacheOperations class
 import pytest
 import json
 import base64
-from unittest.mock import Mock, patch, MagicMock
-from krista_infinispan.cache_operations import CacheOperations
+from unittest.mock import Mock
+from package.cache_operations import CacheOperations
 
 
 class TestCacheOperations:
