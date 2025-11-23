@@ -3,7 +3,7 @@ name: Publish krista-infinispan Package
 on:
   push:
     tags:
-      - 'v*'
+      - 'v-infinispan'
   workflow_dispatch:
 
 jobs:
