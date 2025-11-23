@@ -42,7 +42,7 @@ jobs:
         cd krista_infinispan
         COVERAGE=$(python -c "import xml.etree.ElementTree as ET; tree = ET.parse('coverage.xml'); root = tree.getroot(); print(float(root.attrib['line-rate']) * 100)")
         echo "Coverage: ${COVERAGE}%"
-        if (( $(echo "$COVERAGE < 50" | bc -l) )); then
+        if (( $(echo "$COVERAGE < 90" | bc -l) )); then
           echo "❌ Coverage ${COVERAGE}% is below required 50%"
           exit 1
         else
