@@ -27,7 +27,7 @@ jobs:
     
     - name: Run tests
       run: |
-        cd krista-infinispan
+        cd krista_infinispan
         uv run pytest --cov=krista_infinispan --cov-report=term-missing --cov-report=xml
     
     - name: Upload coverage to Codecov
