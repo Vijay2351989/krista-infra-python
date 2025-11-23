@@ -23,7 +23,6 @@ The package uses a `cache_config.json` file for Infinispan connection settings. 
   "port": 11222,
   "username": "admin",
   "password": "admin",
-  "protocol": "rest",
   "caches": {
     "default": {
       "enabled": true,
@@ -92,7 +91,6 @@ The package uses a `cache_config.json` file for Infinispan connection settings. 
 | `port` | integer | `11222` | Infinispan server port |
 | `username` | string | `admin` | Authentication username |
 | `password` | string | `admin` | Authentication password |
-| `protocol` | string | `rest` | Protocol type (rest/hotrod) |
 
 ### Cache Configuration
 Each cache in the `caches` object supports these parameters:

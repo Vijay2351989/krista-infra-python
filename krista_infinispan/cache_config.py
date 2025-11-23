@@ -30,12 +30,12 @@ class CacheConfig:
     @property
     def host(self) -> str:
         """Get cache host from environment variable or config file."""
-        return os.getenv('CACHE_HOST', self.config.get('host', 'localhost'))
+        return os.getenv('INFINISPAN_HOST', self.config.get('host', 'localhost'))
 
     @property
     def port(self) -> int:
         """Get cache port from environment variable or config file."""
-        port = os.getenv('CACHE_PORT')
+        port = os.getenv('INFINISPAN_PORT')
         if port:
             return int(port)
         return self.config.get('port', 11222)
@@ -43,26 +43,12 @@ class CacheConfig:
     @property
     def username(self) -> str:
         """Get cache username from environment variable or config file."""
-        return os.getenv('CACHE_USERNAME', self.config.get('username', 'admin'))
+        return os.getenv('INFINISPAN_USERNAME', self.config.get('username', 'admin'))
 
     @property
     def password(self) -> str:
         """Get cache password from environment variable or config file."""
-        return os.getenv('CACHE_PASSWORD', self.config.get('password', ''))
-
-    @property
-    def protocol(self) -> str:
-        """Protocol to use: 'hotrod' or 'rest'"""
-        return os.getenv('CACHE_PROTOCOL', self.config.get('protocol', 'hotrod'))
-
-    @property
-    def cache_name(self) -> str:
-        """Name of the cache to use (legacy - for backward compatibility)."""
-        return self.config.get('cache_name', 'default')
-
-    def get_hotrod_connection_string(self) -> str:
-        """Get HotRod connection string for Infinispan."""
-        return f"{self.host}:{self.port}"
+        return os.getenv('INFINISPAN_PASSWORD', self.config.get('password', ''))
 
     def get_rest_url(self) -> str:
         """Get REST API base URL for Infinispan."""

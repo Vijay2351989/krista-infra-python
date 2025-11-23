@@ -76,22 +76,34 @@ def cache_config(sample_cache_config):
     if os.path.exists(temp_file):
         os.unlink(temp_file)
 
-
 @pytest.fixture
 def mock_requests():
-    """Mock requests for HTTP calls"""
-    with patch('requests.Session') as mock_session:
-        mock_response = Mock()
-        mock_response.status_code = 200
-        mock_response.json.return_value = {}
-        mock_response.text = "OK"
+    """Simple requests mock that actually works"""
+    with patch('requests.get') as mock_get, \
+         patch('requests.post') as mock_post, \
+         patch('requests.put') as mock_put, \
+         patch('requests.delete') as mock_delete:
         
-        mock_session.return_value.get.return_value = mock_response
-        mock_session.return_value.post.return_value = mock_response
-        mock_session.return_value.put.return_value = mock_response
-        mock_session.return_value.delete.return_value = mock_response
+        # Create a simple response mock
+        response = Mock()
+        response.status_code = 200
+        response.json.return_value = {}
+        response.text = "OK"
         
-        yield mock_session
+        # All methods return the same response by default
+        mock_get.return_value = response
+        mock_post.return_value = response
+        mock_put.return_value = response
+        mock_delete.return_value = response
+        
+        # Return the mocks directly
+        yield {
+            'get': mock_get,
+            'post': mock_post,
+            'put': mock_put,
+            'delete': mock_delete,
+            'response': response
+        }
 
 
 @pytest.fixture
@@ -111,3 +123,8 @@ def sample_data():
             "metadata": {"created": "2024-01-01", "version": 1}
         }
     }
+
+@pytest.fixture
+def test_cache_name():
+    """Test cache name for testing"""
+    return "test-cache"
