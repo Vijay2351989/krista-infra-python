@@ -12,7 +12,7 @@ setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/Vijay2351989/krista-infra-python/krista_infinispan",
-    packages=find_packages(),
+    packages={"krista_infinispan"},
     package_dir={"krista_infinispan": "package"},
     include_package_data=True,
     classifiers=[
