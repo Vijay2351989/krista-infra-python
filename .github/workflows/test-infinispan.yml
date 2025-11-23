@@ -48,7 +48,7 @@ jobs:
       with:
         files: |
           krista_infinispan/test-results.xml
-        comment_mode: create new
+        comment_mode: always
         check_name: "Test Results"
         report_individual_runs: true
     
