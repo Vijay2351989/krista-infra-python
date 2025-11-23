@@ -18,7 +18,7 @@ class TestCacheConfig:
             assert config.host == "localhost"
             assert config.port == 11222
             assert config.username == "admin"
-            assert config.password == "admin"
+            assert config.password == "admi"
 
         def test_load_config_with_env_variables(self, temp_config_file):
             """Test environment variable override"""
