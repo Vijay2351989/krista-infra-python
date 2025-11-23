@@ -25,14 +25,46 @@ jobs:
         cd krista_infinispan
         uv sync --dev
     
-    - name: Run tests
+    - name: Run tests with JUnit output
       run: |
         cd krista_infinispan
-        uv run pytest --cov=krista_infinispan --cov-report=term-missing --cov-report=xml
+        uv run pytest --cov=krista_infinispan --cov-report=term-missing --cov-report=xml --cov-report=html --junit-xml=test-results.xml -v
+
+    - name: Check coverage threshold
+      run: |
+        cd krista_infinispan
+        COVERAGE=$(python -c "import xml.etree.ElementTree as ET; tree = ET.parse('coverage.xml'); root = tree.getroot(); print(float(root.attrib['line-rate']) * 100)")
+        echo "Coverage: ${COVERAGE}%"
+        if (( $(echo "$COVERAGE < 50" | bc -l) )); then
+          echo "❌ Coverage ${COVERAGE}% is below required 50%"
+          exit 1
+        else
+          echo "✅ Coverage ${COVERAGE}% meets minimum requirement"
+        fi
     
-    - name: Upload coverage to Codecov
+    - name: Publish Test Results
+      uses: EnricoMi/publish-unit-test-result-action@v2
+      if: always()
+      with:
+        files: |
+          krista_infinispan/test-results.xml
+        comment_mode: create new
+        check_name: "Test Results"
+        report_individual_runs: true
+    
+    - name: Upload coverage reports
       uses: codecov/codecov-action@v3
       with:
         file: krista_infinispan/coverage.xml
         flags: unittests
         name: codecov-umbrella
+    
+    - name: Upload test results as artifact
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: test-results
+        path: |
+          krista_infinispan/test-results.xml
+          krista_infinispan/coverage.xml
+          krista_infinispan/htmlcov/
