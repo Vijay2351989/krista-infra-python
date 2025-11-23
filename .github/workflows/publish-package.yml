@@ -1,4 +1,4 @@
-name: Publish krista-infinispan Package
+name: Publish krista-infinispan package
 
 on:
   push:
