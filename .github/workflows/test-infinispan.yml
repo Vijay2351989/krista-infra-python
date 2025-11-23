@@ -22,7 +22,7 @@ jobs:
     
     - name: Install dependencies
       run: |
-        cd krista-infinispan
+        cd krista_infinispan
         uv sync --dev
     
     - name: Run tests
@@ -33,6 +33,6 @@ jobs:
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v3
       with:
-        file: krista-infinispan/coverage.xml
+        file: krista_infinispan/coverage.xml
         flags: unittests
         name: codecov-umbrella
