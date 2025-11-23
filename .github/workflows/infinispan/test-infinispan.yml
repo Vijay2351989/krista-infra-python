@@ -1,39 +1,34 @@
-name: Test krista-infinispan
+name: Run Tests
 
 on:
-  push:
-    branches: [ main, develop ]
-    paths: [ 'krista-infinispan/**' ]
   pull_request:
     branches: [ main ]
-    paths: [ 'krista-infinispan/**' ]
 
 jobs:
   test:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: [3.8, 3.9, '3.10', 3.11]
-
     steps:
     - uses: actions/checkout@v4
     
-    - name: Set up Python ${{ matrix.python-version }}
+    - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: ${{ matrix.python-version }}
+        python-version: '3.9'
+    
+    - name: Install uv
+      uses: astral-sh/setup-uv@v2
+      with:
+        version: "latest"
     
     - name: Install dependencies
       run: |
         cd krista-infinispan
-        python -m pip install --upgrade pip
-        pip install -e .
-        pip install -r requirements.txt
+        uv sync --dev
     
-    - name: Run tests with coverage
+    - name: Run tests
       run: |
         cd krista-infinispan
-        pytest tests/ --cov=krista_infinispan --cov-report=xml --cov-report=html
+        uv run pytest --cov=krista_infinispan --cov-report=term-missing --cov-report=xml
     
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v3
