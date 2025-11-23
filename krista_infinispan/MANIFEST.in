@@ -1,6 +1,4 @@
 include README.md
-include LICENSE
-include pyproject.toml
-recursive-include package *.py
-recursive-exclude * __pycache__
-recursive-exclude * *.py[co]
+include package/*
+recursive-include package *
+prune tests
