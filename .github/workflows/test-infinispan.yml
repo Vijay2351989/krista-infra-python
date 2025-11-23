@@ -35,7 +35,7 @@ jobs:
     - name: Run tests with JUnit output
       run: |
         cd krista_infinispan
-        uv run pytest --cov=krista_infinispan --cov-report=term-missing --cov-report=xml --cov-report=html --junit-xml=test-results.xml -v
+        uv run pytest --cov=krista_infinispan.package --cov-report=term-missing --cov-report=xml --cov-report=html --junit-xml=test-results.xml -v
 
     - name: Check coverage threshold
       run: |
