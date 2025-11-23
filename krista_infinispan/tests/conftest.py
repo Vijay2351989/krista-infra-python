@@ -6,7 +6,7 @@ import json
 import tempfile
 import os
 from unittest.mock import Mock, patch
-from krista_infinispan.cache_config import CacheConfig
+from krista_infinispan.package.cache_config import CacheConfig
 
 
 @pytest.fixture
