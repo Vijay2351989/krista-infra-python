@@ -10,7 +10,7 @@ import requests
 import time
 from typing import Dict, Any
 from requests.auth import HTTPDigestAuth
-from cache_config import CacheConfig
+from .cache_config import CacheConfig
 
 logger = logging.getLogger(__name__)
 

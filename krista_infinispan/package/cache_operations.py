@@ -14,8 +14,8 @@ import base64
 import time
 from typing import Any, Optional
 from requests.auth import HTTPDigestAuth
-from cache_config import CacheConfig
-from cache_creator import CacheCreator
+from .cache_config import CacheConfig
+from .cache_creator import CacheCreator
 
 logger = logging.getLogger(__name__)
 
