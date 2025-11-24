@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="krista-infinispan",
-    version="1.0.0",
+    version="1.0.7",
     author="Vijay Bhatt",
     author_email="vijay.bhatt@kristasoft.com",
     description="Python package with Infinispan integration",
